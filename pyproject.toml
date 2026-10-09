@@ -1,0 +1,29 @@
+[project]
+name = "strudel-tts"
+version = "0.1.0"
+description = "Local Shabda-compatible speech sample server for Strudel (Kokoro on MLX + RVC voice conversion)"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "mlx-audio>=0.5.8",
+    "misaki[en]>=0.9",
+    "mlx-rvc>=0.1.0",
+    "faiss-cpu>=1.8",
+    "soundfile>=0.12",
+    "numpy>=1.26",
+    # misaki downloads its spaCy English model via pip at first run; uv venvs ship without pip
+    "pip",
+]
+
+[project.scripts]
+strudel-tts = "strudel_tts.__main__:main"
+
+[tool.uv.sources]
+mlx-rvc = { git = "https://github.com/lextoumbourou/mlx-rvc" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
